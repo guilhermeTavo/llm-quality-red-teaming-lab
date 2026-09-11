@@ -4,387 +4,560 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LLM Quality & Red Teaming Lab | Guilherme Tavares</title>
-  <meta name="description" content="Portfolio project by Guilherme Tavares focused on LLM evaluation, AI Quality, red teaming, hallucination detection, instruction following and safety testing." />
+  <meta name="description" content="Editorial portfolio page for Guilherme Tavares' LLM Quality and Red Teaming Lab, focused on structured AI evaluation, QA rubrics, safety testing and hallucination checks." />
   <style>
+    /* Hallmark · page: editorial dossier · theme: paper ledger
+     * pre-emit critique: Philosophy 5 · Hierarchy 4 · Execution 4 · Specificity 5 · Restraint 5 · Variety 4
+     */
     :root {
-      --bg: #0f172a;
-      --card: #111827;
-      --card-soft: #1f2937;
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --accent: #38bdf8;
-      --accent-soft: rgba(56, 189, 248, 0.12);
-      --border: rgba(148, 163, 184, 0.25);
-      --success: #22c55e;
+      --color-paper: #f4efe6;
+      --color-paper-deep: #e8ddca;
+      --color-panel: #fffaf0;
+      --color-ink: #1d1a16;
+      --color-muted: #665f55;
+      --color-rule: #c9bda8;
+      --color-rule-strong: #8d7b63;
+      --color-accent: #9b2f24;
+      --color-accent-soft: #ead1c8;
+      --color-good: #335f3b;
+      --color-warning: #785315;
+      --font-display: Georgia, "Times New Roman", serif;
+      --font-body: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-mono: "Courier New", Courier, monospace;
+      --space-page: clamp(18px, 3vw, 36px);
+      --measure: 72ch;
     }
 
     * {
       box-sizing: border-box;
+    }
+
+    html,
+    body {
       margin: 0;
-      padding: 0;
+      overflow-x: clip;
+      background: var(--color-paper);
+      color: var(--color-ink);
+      font-family: var(--font-body);
+      line-height: 1.58;
     }
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: radial-gradient(circle at top left, #1e293b 0, #0f172a 42%, #020617 100%);
-      color: var(--text);
-      line-height: 1.6;
+      min-height: 100vh;
     }
 
     a {
-      color: var(--accent);
-      text-decoration: none;
+      color: var(--color-accent);
+      text-decoration-thickness: 0.08em;
+      text-underline-offset: 0.18em;
     }
 
     a:hover {
-      text-decoration: underline;
+      text-decoration-thickness: 0.14em;
     }
 
-    .container {
-      width: min(1120px, 92%);
+    .page {
+      width: min(1180px, calc(100% - var(--space-page) * 2));
       margin: 0 auto;
     }
 
-    header {
-      padding: 56px 0 32px;
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--color-rule);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--color-muted);
     }
 
-    .hero {
+    .topbar nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .masthead {
       display: grid;
-      grid-template-columns: 1.3fr 0.7fr;
-      gap: 32px;
-      align-items: center;
+      grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+      gap: clamp(26px, 5vw, 70px);
+      padding: clamp(44px, 8vw, 92px) 0 clamp(34px, 5vw, 64px);
+      border-bottom: 2px solid var(--color-ink);
     }
 
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-size: 14px;
-      margin-bottom: 18px;
+    .case-meta {
+      border-left: 4px solid var(--color-accent);
+      padding-left: 18px;
+      align-self: start;
+    }
+
+    .case-meta p {
+      margin: 0 0 14px;
+      color: var(--color-muted);
+    }
+
+    .case-meta strong {
+      display: block;
+      color: var(--color-ink);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--font-display);
+      font-style: normal;
+      font-weight: 700;
+      line-height: 0.98;
+      margin: 0;
+      overflow-wrap: anywhere;
     }
 
     h1 {
-      font-size: clamp(36px, 6vw, 72px);
-      line-height: 1.03;
-      margin-bottom: 20px;
-      letter-spacing: -0.04em;
+      font-size: clamp(48px, 10vw, 132px);
+      letter-spacing: -0.055em;
+      max-width: 860px;
     }
 
-    .subtitle {
-      font-size: clamp(18px, 2vw, 22px);
-      color: var(--muted);
-      max-width: 760px;
-      margin-bottom: 28px;
+    .lede {
+      max-width: var(--measure);
+      margin: 28px 0 0;
+      font-size: clamp(18px, 2.2vw, 24px);
+      color: var(--color-muted);
     }
 
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
+    .document-links {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      margin: 28px 0 0;
+      background: var(--color-rule);
+      border: 1px solid var(--color-rule);
     }
 
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 12px 18px;
-      border-radius: 12px;
-      font-weight: 700;
-      border: 1px solid var(--border);
-      background: var(--card-soft);
-      color: var(--text);
+    .document-links a {
+      min-width: 0;
+      padding: 16px;
+      background: var(--color-panel);
+      color: var(--color-ink);
+      text-decoration: none;
     }
 
-    .button.primary {
-      background: var(--accent);
-      color: #020617;
-      border-color: transparent;
-    }
-
-    .hero-card {
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 24px;
-      background: rgba(17, 24, 39, 0.78);
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
-    }
-
-    .metric {
-      padding: 18px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .metric:last-child {
-      border-bottom: none;
-    }
-
-    .metric strong {
+    .document-links span {
       display: block;
-      font-size: 34px;
-      color: var(--success);
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-
-    .metric span {
-      color: var(--muted);
-      font-size: 14px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--color-accent);
+      margin-bottom: 5px;
     }
 
     section {
-      padding: 38px 0;
+      padding: clamp(34px, 6vw, 72px) 0;
+      border-bottom: 1px solid var(--color-rule);
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
+      gap: clamp(24px, 5vw, 64px);
+      align-items: start;
     }
 
     h2 {
-      font-size: clamp(26px, 4vw, 40px);
-      line-height: 1.12;
-      margin-bottom: 16px;
-      letter-spacing: -0.03em;
+      font-size: clamp(34px, 6vw, 76px);
+      letter-spacing: -0.045em;
     }
 
-    .section-intro {
-      color: var(--muted);
-      max-width: 780px;
-      margin-bottom: 22px;
+    .section-note {
+      max-width: var(--measure);
+      margin: 0;
+      color: var(--color-muted);
+      font-size: 17px;
     }
 
-    .grid {
+    .ledger {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--color-panel);
+      border: 1px solid var(--color-rule);
+    }
+
+    .ledger th,
+    .ledger td {
+      border-bottom: 1px solid var(--color-rule);
+      padding: 13px 14px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .ledger th {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--color-muted);
+      font-weight: 700;
+    }
+
+    .ledger td:first-child {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--color-accent);
+      white-space: nowrap;
+    }
+
+    .ledger tr:last-child th,
+    .ledger tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .metric-sheet {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 1px;
+      background: var(--color-rule-strong);
+      border: 1px solid var(--color-rule-strong);
     }
 
-    .card {
-      background: rgba(17, 24, 39, 0.78);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 20px;
+    .metric-main,
+    .metric-stack > div {
+      background: var(--color-panel);
+      padding: clamp(20px, 4vw, 38px);
     }
 
-    .card h3 {
-      font-size: 18px;
+    .metric-main strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: clamp(70px, 11vw, 150px);
+      line-height: 0.85;
+      letter-spacing: -0.06em;
+      color: var(--color-accent);
+    }
+
+    .metric-main span,
+    .metric-stack span {
+      display: block;
+      margin-top: 10px;
+      color: var(--color-muted);
+    }
+
+    .metric-stack {
+      display: grid;
+      gap: 1px;
+    }
+
+    .metric-stack strong {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: clamp(26px, 4vw, 44px);
+      line-height: 1;
+      color: var(--color-ink);
+    }
+
+    .method-block {
+      display: grid;
+      gap: 18px;
+    }
+
+    .method-item {
+      padding: 0 0 18px;
+      border-bottom: 1px solid var(--color-rule);
+    }
+
+    .method-item h3 {
+      font-size: clamp(24px, 3vw, 34px);
+      letter-spacing: -0.025em;
       margin-bottom: 8px;
     }
 
-    .card p,
-    .card li {
-      color: var(--muted);
-      font-size: 15px;
+    .method-item p {
+      margin: 0;
+      color: var(--color-muted);
     }
 
-    ul {
-      padding-left: 18px;
-    }
-
-    .wide {
-      grid-column: span 2;
-    }
-
-    .steps {
-      counter-reset: step;
+    .specimen {
       display: grid;
-      gap: 14px;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 1px;
+      background: var(--color-rule);
+      border: 1px solid var(--color-rule);
     }
 
-    .step {
+    .specimen article {
+      min-width: 0;
+      background: var(--color-panel);
+      padding: clamp(20px, 4vw, 34px);
+    }
+
+    .specimen h3 {
+      font-size: clamp(26px, 4vw, 44px);
+      letter-spacing: -0.035em;
+      margin-bottom: 16px;
+    }
+
+    .specimen p {
+      margin: 0 0 14px;
+      color: var(--color-muted);
+    }
+
+    code,
+    .mono {
+      font-family: var(--font-mono);
+      font-size: 0.95em;
+    }
+
+    .status-line {
+      display: inline-block;
+      padding: 5px 8px;
+      border: 1px solid var(--color-rule);
+      background: var(--color-paper-deep);
+      color: var(--color-good);
+      font-family: var(--font-mono);
+      font-size: 13px;
+    }
+
+    .warning-line {
+      color: var(--color-warning);
+      font-family: var(--font-mono);
+      font-size: 14px;
+    }
+
+    .closing {
       display: grid;
-      grid-template-columns: 48px 1fr;
-      gap: 14px;
-      align-items: start;
-      background: rgba(17, 24, 39, 0.78);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 18px;
+      grid-template-columns: minmax(0, 0.65fr) minmax(0, 0.35fr);
+      gap: clamp(22px, 5vw, 62px);
+      padding: clamp(34px, 6vw, 76px) 0;
     }
 
-    .step::before {
-      counter-increment: step;
-      content: counter(step);
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: var(--accent-soft);
-      color: var(--accent);
-      display: grid;
-      place-items: center;
-      font-weight: 800;
+    .closing h2 {
+      max-width: 760px;
     }
 
-    .step p {
-      color: var(--muted);
+    .closing aside {
+      border-top: 2px solid var(--color-ink);
+      padding-top: 18px;
+      color: var(--color-muted);
     }
 
-    .footer {
-      padding: 44px 0 56px;
-      color: var(--muted);
-      border-top: 1px solid var(--border);
-      margin-top: 32px;
+    footer {
+      padding: 26px 0 42px;
+      border-top: 1px solid var(--color-rule);
+      color: var(--color-muted);
+      font-size: 14px;
     }
 
-    @media (max-width: 860px) {
-      .hero {
+    footer .page {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .masthead,
+      .split,
+      .metric-sheet,
+      .specimen,
+      .closing {
         grid-template-columns: 1fr;
       }
 
-      .grid {
+      .document-links {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .topbar,
+      footer .page {
+        display: block;
+      }
+
+      .topbar nav {
+        margin-top: 10px;
+      }
+
+      .document-links {
         grid-template-columns: 1fr;
       }
 
-      .wide {
-        grid-column: auto;
+      .ledger {
+        font-size: 14px;
+      }
+
+      .ledger th,
+      .ledger td {
+        padding: 10px;
       }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="container hero">
-      <div>
-        <div class="badge">AI Quality • LLM Evaluation • Red Teaming</div>
-        <h1>LLM Quality & Red Teaming Lab</h1>
-        <p class="subtitle">
-          A practical portfolio project focused on evaluating LLM responses through structured QA rubrics, adversarial testing, hallucination detection, PT-BR localization checks and safety evaluation.
-        </p>
-        <div class="actions">
-          <a class="button primary" href="../README.md">View project README</a>
-          <a class="button" href="../results/evaluation-report.md">Read evaluation report</a>
-          <a class="button" href="https://github.com/guilhermeTavo/llm-quality-red-teaming-lab">GitHub repository</a>
-        </div>
-      </div>
+  <div class="page">
+    <div class="topbar">
+      <div>Guilherme Tavares / AI Quality Portfolio</div>
+      <nav aria-label="Project links">
+        <a href="https://github.com/guilhermeTavo/llm-quality-red-teaming-lab">Repository</a>
+        <a href="https://github.com/guilhermeTavo/llm-quality-red-teaming-lab/blob/main/results/evaluation-report.md">Report</a>
+        <a href="https://github.com/guilhermeTavo/llm-quality-red-teaming-lab/blob/main/methodology/evaluation-rubric.md">Rubric</a>
+      </nav>
+    </div>
+  </div>
 
-      <aside class="hero-card" aria-label="Project metrics">
-        <div class="metric">
-          <strong>20</strong>
-          <span>sample test cases executed</span>
-        </div>
-        <div class="metric">
-          <strong>10</strong>
-          <span>quality evaluation tests</span>
-        </div>
-        <div class="metric">
-          <strong>10</strong>
-          <span>red teaming and safety tests</span>
-        </div>
-        <div class="metric">
-          <strong>100%</strong>
-          <span>sample safety pass rate</span>
-        </div>
-      </aside>
+  <header class="page masthead">
+    <aside class="case-meta" aria-label="Project metadata">
+      <p><strong>Case type</strong> Manual LLM evaluation lab</p>
+      <p><strong>Focus</strong> QA rubrics, hallucination checks, PT-BR localization, safety and adversarial testing</p>
+      <p><strong>Status</strong> Sample evaluation run completed</p>
+      <p><strong>Important note</strong> This is a portfolio workflow demonstration, not an official benchmark.</p>
+    </aside>
+
+    <div>
+      <h1>LLM Quality & Red Teaming Lab</h1>
+      <p class="lede">
+        A practical QA field report for language models: structured test cases, scoring rules, severity classification, safety checks and a small Python analysis script.
+      </p>
+      <div class="document-links" aria-label="Document links">
+        <a href="https://github.com/guilhermeTavo/llm-quality-red-teaming-lab/blob/main/README.md"><span>README</span>Project overview</a>
+        <a href="https://github.com/guilhermeTavo/llm-quality-red-teaming-lab/blob/main/test-cases/quality-tests.csv"><span>CSV</span>Quality test cases</a>
+        <a href="https://github.com/guilhermeTavo/llm-quality-red-teaming-lab/blob/main/test-cases/red-team-tests.csv"><span>CSV</span>Red-team cases</a>
+        <a href="https://github.com/guilhermeTavo/llm-quality-red-teaming-lab/blob/main/scripts/analyze_results.py"><span>PY</span>Metrics script</a>
+      </div>
     </div>
   </header>
 
-  <main>
-    <section>
-      <div class="container">
-        <h2>Project Goal</h2>
-        <p class="section-intro">
-          The goal of this lab is to show a systematic approach to AI Quality: creating evaluation criteria, designing test cases, running manual model evaluations, documenting failures and extracting basic metrics from results.
+  <main class="page">
+    <section class="split">
+      <div>
+        <h2>Evidence before polish.</h2>
+      </div>
+      <div>
+        <p class="section-note">
+          This lab treats LLM output as something that can be tested, reviewed and documented. Each response is judged by independent criteria instead of a vague “good” or “bad” decision.
         </p>
       </div>
     </section>
 
     <section>
-      <div class="container">
-        <h2>What is evaluated</h2>
-        <p class="section-intro">
-          Each response is reviewed using independent quality dimensions instead of a vague general judgment.
-        </p>
-        <div class="grid">
-          <article class="card">
-            <h3>Factual Accuracy</h3>
-            <p>Checks whether factual claims are correct and whether unsupported claims are avoided.</p>
-          </article>
-          <article class="card">
-            <h3>Instruction Following</h3>
-            <p>Checks whether the model respects explicit user constraints such as format, length and scope.</p>
-          </article>
-          <article class="card">
-            <h3>Hallucination</h3>
-            <p>Checks whether the model invents people, events, sources, citations or private information.</p>
-          </article>
-          <article class="card">
-            <h3>PT-BR Localization</h3>
-            <p>Checks whether Brazilian Portuguese responses sound natural, localized and appropriate.</p>
-          </article>
-          <article class="card">
-            <h3>Safety</h3>
-            <p>Checks whether the model refuses unsafe requests and avoids harmful guidance.</p>
-          </article>
-          <article class="card">
-            <h3>Adversarial Robustness</h3>
-            <p>Checks resistance to prompt injection, jailbreaks, fake authority and data leakage attempts.</p>
-          </article>
+      <div class="metric-sheet" aria-label="Sample run metrics">
+        <div class="metric-main">
+          <strong>20</strong>
+          <span>sample test cases executed in the first manual run</span>
         </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="container">
-        <h2>Workflow</h2>
-        <div class="steps">
-          <div class="step">
-            <div>
-              <h3>Define evaluation rubric</h3>
-              <p>Create scoring rules for accuracy, instruction following, relevance, clarity, hallucination and localization.</p>
-            </div>
+        <div class="metric-stack">
+          <div>
+            <strong>10</strong>
+            <span>quality-focused tests</span>
           </div>
-          <div class="step">
-            <div>
-              <h3>Create test cases</h3>
-              <p>Design quality tests and red-team tests covering normal usage, edge cases and adversarial prompts.</p>
-            </div>
+          <div>
+            <strong>10</strong>
+            <span>red-team and safety tests</span>
           </div>
-          <div class="step">
-            <div>
-              <h3>Evaluate model responses</h3>
-              <p>Record model responses, score each dimension, classify safety behavior and assign severity.</p>
-            </div>
-          </div>
-          <div class="step">
-            <div>
-              <h3>Generate metrics</h3>
-              <p>Use a Python script to calculate pass rate, safety pass rate, average scores and severity distribution.</p>
-            </div>
+          <div>
+            <strong>100%</strong>
+            <span>sample safety pass rate</span>
           </div>
         </div>
       </div>
     </section>
 
-    <section>
-      <div class="container">
-        <h2>What this demonstrates</h2>
-        <div class="grid">
-          <article class="card wide">
-            <h3>AI Quality mindset</h3>
-            <p>
-              This project demonstrates a QA-oriented approach to LLM evaluation: structured testing, evidence-based scoring, reproducible criteria, issue severity and result reporting.
-            </p>
-          </article>
-          <article class="card">
-            <h3>Relevant roles</h3>
-            <ul>
-              <li>AI Quality Analyst</li>
-              <li>LLM Evaluator</li>
-              <li>AI Model Evaluator</li>
-              <li>AI Safety Evaluator</li>
-              <li>QA Analyst</li>
-            </ul>
-          </article>
-        </div>
+    <section class="split">
+      <div>
+        <h2>Inspection ledger</h2>
       </div>
+      <table class="ledger" aria-label="Evaluation dimensions">
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th>What it checks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Accuracy</td>
+            <td>Whether factual claims are correct and do not distort the answer.</td>
+          </tr>
+          <tr>
+            <td>Instructions</td>
+            <td>Whether the model follows requested format, length, scope and constraints.</td>
+          </tr>
+          <tr>
+            <td>Hallucination</td>
+            <td>Whether the answer invents people, events, citations, sources or private details.</td>
+          </tr>
+          <tr>
+            <td>Localization</td>
+            <td>Whether Brazilian Portuguese output sounds natural and appropriate for support or QA contexts.</td>
+          </tr>
+          <tr>
+            <td>Safety</td>
+            <td>Whether unsafe, illegal, private or adversarial requests are handled correctly.</td>
+          </tr>
+          <tr>
+            <td>Robustness</td>
+            <td>Whether the model resists prompt injection, fake authority and jailbreak attempts.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="split">
+      <div>
+        <h2>Method</h2>
+      </div>
+      <div class="method-block">
+        <article class="method-item">
+          <h3>Define the rules</h3>
+          <p>The project starts with a rubric and severity guide so each evaluation can be scored consistently.</p>
+        </article>
+        <article class="method-item">
+          <h3>Design the tests</h3>
+          <p>Quality cases cover normal user tasks. Red-team cases cover prompt injection, jailbreaks, data leakage and unsafe requests.</p>
+        </article>
+        <article class="method-item">
+          <h3>Record the result</h3>
+          <p>Each model response is stored with scores, PASS/FAIL status, severity and evaluator notes.</p>
+        </article>
+        <article class="method-item">
+          <h3>Generate the summary</h3>
+          <p>A Python script reads the CSV results and produces a metrics summary for review.</p>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="specimen">
+        <article>
+          <h3>Sample finding</h3>
+          <p><span class="status-line">PASS</span></p>
+          <p>The first manual run did not identify major safety failures. The model refused direct attempts to reveal hidden instructions, bypass payments or fabricate legal authority.</p>
+          <p class="warning-line">Scope limitation: one model, small test set, manual review.</p>
+        </article>
+        <article>
+          <h3>Portfolio value</h3>
+          <p>This project shows a practical AI Quality workflow: test design, evaluation criteria, red-team thinking, issue severity and metric generation.</p>
+          <p>It is designed for roles such as <span class="mono">AI Quality Analyst</span>, <span class="mono">LLM Evaluator</span>, <span class="mono">AI Model Evaluator</span> and <span class="mono">QA Analyst</span>.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div>
+        <h2>A small lab built like a real QA artifact.</h2>
+      </div>
+      <aside>
+        <p><strong>Next iteration:</strong> expand the test set to 50+ cases, evaluate another model and compare score distributions across dimensions.</p>
+        <p><a href="https://github.com/guilhermeTavo/llm-quality-red-teaming-lab">Open the GitHub repository</a></p>
+      </aside>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container">
-      <p><strong>Guilherme Tavares</strong> — AI Quality Analyst | LLM Evaluator | QA Tester</p>
-      <p><a href="https://www.linkedin.com/in/guilherme-tavares-398563240/">LinkedIn</a> • <a href="https://github.com/guilhermeTavo">GitHub</a></p>
+  <footer>
+    <div class="page">
+      <div><strong>Guilherme Tavares</strong> | AI Quality Analyst | LLM Evaluator | QA Tester</div>
+      <div><a href="https://www.linkedin.com/in/guilherme-tavares-398563240/">LinkedIn</a> · <a href="https://github.com/guilhermeTavo">GitHub</a></div>
     </div>
   </footer>
 </body>
