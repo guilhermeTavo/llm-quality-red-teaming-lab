@@ -2,13 +2,13 @@
 
 A practical portfolio project focused on evaluating Large Language Model (LLM) outputs through structured quality assurance, human evaluation and adversarial testing.
 
-## 🎯 Project Objective
+## Project Objective
 
 The goal of this project is to design and execute a systematic process for evaluating LLM responses and identifying quality issues, behavioral inconsistencies, hallucinations, instruction-following failures, safety risks and edge cases.
 
 The project applies traditional Software Quality Assurance principles to Generative AI and LLM evaluation.
 
-## ✅ Current Status
+## Current Status
 
 The first version of the lab includes:
 
@@ -20,10 +20,13 @@ The first version of the lab includes:
 - Evaluation report
 - Python script for basic metrics analysis
 - Metrics summary in Markdown
+- Editorial landing page in `docs/index.html`
+- Design system in `design.md`
+- Landing page anti-slop audit in `docs/design-audit.md`
 
 > Note: the current evaluation results are a first manual sample run used to demonstrate the evaluation workflow. Future iterations can compare multiple models and replace sample outputs with fresh model responses.
 
-## 🔎 Evaluation Areas
+## Evaluation Areas
 
 This lab focuses on:
 
@@ -36,7 +39,7 @@ This lab focuses on:
 - Safety
 - Adversarial Robustness
 
-## 🧪 Testing Approach
+## Testing Approach
 
 The evaluation process includes:
 
@@ -51,7 +54,7 @@ The evaluation process includes:
 - Severity classification
 - Result analysis
 
-## 📊 Metrics Generated
+## Metrics Generated
 
 The analysis script calculates:
 
@@ -62,7 +65,7 @@ The analysis script calculates:
 - Average score by evaluation dimension
 - Severity distribution
 
-## ▶️ How to Run the Analysis
+## How to Run the Analysis
 
 From the project root, run:
 
@@ -82,10 +85,33 @@ and updates:
 results/metrics-summary.md
 ```
 
-## 📂 Project Structure
+## Landing Page
+
+The project includes a static portfolio landing page at:
+
+```text
+docs/index.html
+```
+
+The page was redesigned using a Hallmark-inspired anti-AI-slop direction. Instead of a generic AI SaaS layout, the page uses an editorial / field-report style focused on methodology, evidence and project credibility.
+
+The design process is documented in:
+
+```text
+design.md
+docs/design-audit.md
+```
+
+## Project Structure
 
 ```text
 llm-quality-red-teaming-lab/
+│
+├── design.md
+│
+├── docs/
+│   ├── index.html
+│   └── design-audit.md
 │
 ├── methodology/
 │   ├── evaluation-rubric.md
@@ -107,7 +133,7 @@ llm-quality-red-teaming-lab/
 └── README.md
 ```
 
-## 🧠 What This Project Demonstrates
+## What This Project Demonstrates
 
 This project demonstrates the ability to:
 
@@ -117,18 +143,20 @@ This project demonstrates the ability to:
 - Classify issue severity based on user impact
 - Document evaluation results in a reproducible format
 - Use Python to generate simple quality metrics from evaluation data
+- Present technical work through a portfolio-ready project page
+- Audit and improve AI-generated design patterns
 
-## 🚀 Next Steps
+## Next Steps
 
 Planned improvements:
 
-- Add a simple GitHub Pages portfolio page
+- Enable GitHub Pages using the `/docs` folder
 - Add model comparison results
 - Add more PT-BR localization and safety cases
 - Add charts for pass rate and severity distribution
 - Add a LinkedIn-ready project summary
 
-## 👤 Author
+## Author
 
 **Guilherme Tavares**
 
