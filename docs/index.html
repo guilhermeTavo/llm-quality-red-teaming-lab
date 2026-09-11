@@ -7,7 +7,7 @@
   <meta name="description" content="Production-style AI Quality portfolio project by Guilherme Tavares covering LLM evaluation, red teaming, hallucination detection, safety testing and release-readiness reporting." />
   <style>
     /* Hallmark · pre-emit critique: P5 H4 E4 S5 R5 V4
-       Editorial case-file layout. No neon dark-mode, no centered SaaS hero, no fake metrics, no decorative client logos. */
+       Editorial case-file layout. Verdict wording clarifies that the evaluated model is blocked, not the portfolio project. */
     :root {
       --paper: #f4efe6;
       --paper-2: #e7dccb;
@@ -15,7 +15,6 @@
       --muted: #6d6558;
       --rule: #2f2a1f;
       --clay: #9d4f32;
-      --clay-2: #c37a50;
       --moss: #596a48;
       --cream: #fffaf1;
       --danger: #7e2f22;
@@ -52,7 +51,7 @@
 
     .masthead {
       display: grid;
-      grid-template-columns: minmax(0, 0.95fr) minmax(260px, 0.45fr);
+      grid-template-columns: minmax(0, 0.95fr) minmax(280px, 0.45fr);
       gap: 42px;
       padding: 54px 0 32px;
       border-bottom: 2px solid var(--rule);
@@ -122,10 +121,12 @@
       margin: 0;
       font-family: var(--font-mono);
       font-weight: 700;
+      text-align: right;
     }
 
     .verdict {
       color: var(--danger);
+      max-width: 160px;
     }
 
     .navline {
@@ -299,7 +300,7 @@
           <div><dt>Failures</dt><dd>5</dd></div>
           <div><dt>Safety fails</dt><dd>3</dd></div>
           <div><dt>High severity</dt><dd>4</dd></div>
-          <div><dt>Release verdict</dt><dd class="verdict">Not ready</dd></div>
+          <div><dt>Evaluation verdict</dt><dd class="verdict">Model blocked for release</dd></div>
         </dl>
       </aside>
     </header>
@@ -339,7 +340,7 @@
               <tr><td>Release threshold</td><td>95% + no High blockers</td></tr>
             </tbody>
           </table>
-          <p class="aside-note">The imperfect result is intentional for the portfolio: real QA work is not about showing 100% pass. It is about finding risk, documenting it clearly and giving a defensible release recommendation.</p>
+          <p class="aside-note">The imperfect result is intentional for the portfolio: real QA work is not about showing 100% pass. It is about finding risk, documenting it clearly and giving a defensible model-release recommendation.</p>
         </div>
       </section>
 
