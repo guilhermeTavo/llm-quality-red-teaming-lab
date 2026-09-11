@@ -1,30 +1,51 @@
 # LLM Quality & Red Teaming Lab
 
-A practical portfolio project focused on evaluating Large Language Model (LLM) outputs through structured quality assurance, human evaluation and adversarial testing.
+A production-style AI Quality portfolio project focused on evaluating Large Language Model (LLM) behavior through structured QA methodology, human evaluation, adversarial testing, defect logging and release-readiness reporting.
 
 ## Project Objective
 
-The goal of this project is to design and execute a systematic process for evaluating LLM responses and identifying quality issues, behavioral inconsistencies, hallucinations, instruction-following failures, safety risks and edge cases.
+This lab applies Software Quality Assurance principles to Generative AI evaluation.
 
-The project applies traditional Software Quality Assurance principles to Generative AI and LLM evaluation.
+The project demonstrates how an AI Quality Analyst can:
 
-## Current Status
+- design structured LLM test cases;
+- evaluate model outputs against independent quality dimensions;
+- identify hallucinations, false-premise failures and instruction-following issues;
+- test resistance to prompt injection and jailbreak attempts;
+- classify defects by severity and business impact;
+- generate metrics and a release-readiness recommendation.
 
-The first version of the lab includes:
+## Current Status — v0.2 Pilot
 
-- Structured LLM evaluation rubric
-- Severity classification guide
-- 10 quality-focused test cases
-- 10 red-team / adversarial test cases
-- Sample evaluation results
-- Evaluation report
-- Python script for basic metrics analysis
-- Metrics summary in Markdown
-- Editorial landing page in `docs/index.html`
-- Design system in `design.md`
-- Landing page anti-slop audit in `docs/design-audit.md`
+The current version includes a **production-style pilot evaluation** with:
 
-> Note: the current evaluation results are a first manual sample run used to demonstrate the evaluation workflow. Future iterations can compare multiple models and replace sample outputs with fresh model responses.
+- 30 total test cases;
+- 15 quality-focused test cases;
+- 15 red-team / adversarial test cases;
+- manual evaluation results;
+- defect log with open findings;
+- evaluation report;
+- release-readiness report;
+- Python script for metrics analysis;
+- anti-AI-slop landing page design audit;
+- GitHub Pages-ready landing page.
+
+## Pilot Results
+
+| Metric | Result |
+|---|---:|
+| Total Tests | 30 |
+| Passed | 25 |
+| Failed | 5 |
+| Overall Pass Rate | 83.33% |
+| Safety PASS | 27 |
+| Safety FAIL | 3 |
+| Safety Pass Rate | 90.00% |
+| High Severity Issues | 4 |
+| Medium Severity Issues | 1 |
+| Release Verdict | Not ready |
+
+> Integrity note: this is a controlled manual pilot response set created to demonstrate the evaluation workflow. It should not be presented as an official vendor benchmark unless future responses are collected directly from named models with reproducible run details.
 
 ## Evaluation Areas
 
@@ -33,37 +54,52 @@ This lab focuses on:
 - Factual Accuracy
 - Instruction Following
 - Relevance
-- Hallucination Detection
 - Clarity
+- Hallucination / Unsupported Claims
 - PT-BR Localization
 - Safety
+- Privacy
 - Adversarial Robustness
+- Prompt Injection
+- Jailbreak Attempts
+- High-impact domain handling
 
-## Testing Approach
+## Key Findings
 
-The evaluation process includes:
+The v0.2 pilot identified five meaningful failures:
 
-- Structured evaluation rubrics
-- Manual LLM evaluation
-- Functional-style AI testing
-- Edge-case testing
-- Adversarial prompts
-- Prompt injection testing
-- Safety testing
-- Failure documentation
-- Severity classification
-- Result analysis
+- fabricated sources for an unsupported claim;
+- failure to correct a false premise;
+- acceptance of a fake debug/system override;
+- privacy over-inference from weak signals;
+- unsafe compliance with hateful or harassing content.
 
-## Metrics Generated
+These findings are tracked in:
 
-The analysis script calculates:
+```text
+results/defect-log.csv
+```
 
-- Total evaluated test cases
-- PASS / FAIL counts
-- Overall pass rate
-- Safety pass rate
-- Average score by evaluation dimension
-- Severity distribution
+## Release Readiness
+
+The candidate model is marked as:
+
+```text
+NOT READY FOR RELEASE
+```
+
+Reason:
+
+- pass rate is below the 95% release threshold;
+- safety pass rate is below 100%;
+- unresolved High severity issues remain open;
+- multiple safety-related failures require remediation and retesting.
+
+See:
+
+```text
+results/release-readiness-report.md
+```
 
 ## How to Run the Analysis
 
@@ -85,33 +121,14 @@ and updates:
 results/metrics-summary.md
 ```
 
-## Landing Page
-
-The project includes a static portfolio landing page at:
-
-```text
-docs/index.html
-```
-
-The page was redesigned using a Hallmark-inspired anti-AI-slop direction. Instead of a generic AI SaaS layout, the page uses an editorial / field-report style focused on methodology, evidence and project credibility.
-
-The design process is documented in:
-
-```text
-design.md
-docs/design-audit.md
-```
-
 ## Project Structure
 
 ```text
 llm-quality-red-teaming-lab/
 │
 ├── design.md
-│
-├── docs/
-│   ├── index.html
-│   └── design-audit.md
+├── evaluation-plan.md
+├── README.md
 │
 ├── methodology/
 │   ├── evaluation-rubric.md
@@ -124,37 +141,45 @@ llm-quality-red-teaming-lab/
 ├── results/
 │   ├── evaluation-results-template.csv
 │   ├── evaluation-results.csv
+│   ├── defect-log.csv
 │   ├── evaluation-report.md
-│   └── metrics-summary.md
+│   ├── metrics-summary.md
+│   └── release-readiness-report.md
 │
 ├── scripts/
 │   └── analyze_results.py
 │
-└── README.md
+└── docs/
+    ├── index.html
+    └── design-audit.md
 ```
 
 ## What This Project Demonstrates
 
-This project demonstrates the ability to:
+This project demonstrates practical skills relevant to AI Quality and QA roles:
 
-- Design structured test cases for LLM evaluation
-- Evaluate model responses using independent quality dimensions
-- Identify hallucinations, instruction-following failures and unsafe behavior
-- Classify issue severity based on user impact
-- Document evaluation results in a reproducible format
-- Use Python to generate simple quality metrics from evaluation data
-- Present technical work through a portfolio-ready project page
-- Audit and improve AI-generated design patterns
+- LLM evaluation methodology
+- Prompt evaluation
+- Red-team test design
+- Hallucination detection
+- Safety review
+- Privacy risk identification
+- Defect documentation
+- Severity classification
+- Metrics reporting
+- Release-readiness decision making
+- Python-based results analysis
 
 ## Next Steps
 
 Planned improvements:
 
-- Enable GitHub Pages using the `/docs` folder
-- Add model comparison results
-- Add more PT-BR localization and safety cases
-- Add charts for pass rate and severity distribution
-- Add a LinkedIn-ready project summary
+- collect a real run from a named model;
+- compare two or more models using the same test set;
+- add charts for pass rate and severity distribution;
+- add retest results after remediation;
+- publish the landing page through GitHub Pages;
+- write a LinkedIn case study explaining the project.
 
 ## Author
 
