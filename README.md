@@ -8,6 +8,21 @@ The goal of this project is to design and execute a systematic process for evalu
 
 The project applies traditional Software Quality Assurance principles to Generative AI and LLM evaluation.
 
+## ✅ Current Status
+
+The first version of the lab includes:
+
+- Structured LLM evaluation rubric
+- Severity classification guide
+- 10 quality-focused test cases
+- 10 red-team / adversarial test cases
+- Sample evaluation results
+- Evaluation report
+- Python script for basic metrics analysis
+- Metrics summary in Markdown
+
+> Note: the current evaluation results are a first manual sample run used to demonstrate the evaluation workflow. Future iterations can compare multiple models and replace sample outputs with fresh model responses.
+
 ## 🔎 Evaluation Areas
 
 This lab focuses on:
@@ -23,7 +38,7 @@ This lab focuses on:
 
 ## 🧪 Testing Approach
 
-The evaluation process will include:
+The evaluation process includes:
 
 - Structured evaluation rubrics
 - Manual LLM evaluation
@@ -35,6 +50,37 @@ The evaluation process will include:
 - Failure documentation
 - Severity classification
 - Result analysis
+
+## 📊 Metrics Generated
+
+The analysis script calculates:
+
+- Total evaluated test cases
+- PASS / FAIL counts
+- Overall pass rate
+- Safety pass rate
+- Average score by evaluation dimension
+- Severity distribution
+
+## ▶️ How to Run the Analysis
+
+From the project root, run:
+
+```bash
+python scripts/analyze_results.py
+```
+
+The script reads:
+
+```text
+results/evaluation-results.csv
+```
+
+and updates:
+
+```text
+results/metrics-summary.md
+```
 
 ## 📂 Project Structure
 
@@ -50,8 +96,10 @@ llm-quality-red-teaming-lab/
 │   └── red-team-tests.csv
 │
 ├── results/
+│   ├── evaluation-results-template.csv
 │   ├── evaluation-results.csv
-│   └── evaluation-report.md
+│   ├── evaluation-report.md
+│   └── metrics-summary.md
 │
 ├── scripts/
 │   └── analyze_results.py
@@ -59,11 +107,26 @@ llm-quality-red-teaming-lab/
 └── README.md
 ```
 
-## 🚧 Project Status
+## 🧠 What This Project Demonstrates
 
-Currently under development.
+This project demonstrates the ability to:
 
-The project will progressively include evaluation rubrics, structured test cases, adversarial scenarios, real LLM evaluation results and simple automated analysis.
+- Design structured test cases for LLM evaluation
+- Evaluate model responses using independent quality dimensions
+- Identify hallucinations, instruction-following failures and unsafe behavior
+- Classify issue severity based on user impact
+- Document evaluation results in a reproducible format
+- Use Python to generate simple quality metrics from evaluation data
+
+## 🚀 Next Steps
+
+Planned improvements:
+
+- Add a simple GitHub Pages portfolio page
+- Add model comparison results
+- Add more PT-BR localization and safety cases
+- Add charts for pass rate and severity distribution
+- Add a LinkedIn-ready project summary
 
 ## 👤 Author
 
