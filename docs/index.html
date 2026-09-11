@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LLM Quality & Red Teaming Lab | Guilherme Tavares</title>
+  <meta name="description" content="Portfolio project by Guilherme Tavares focused on LLM evaluation, AI Quality, red teaming, hallucination detection, instruction following and safety testing." />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #111827;
+      --card-soft: #1f2937;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.12);
+      --border: rgba(148, 163, 184, 0.25);
+      --success: #22c55e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: radial-gradient(circle at top left, #1e293b 0, #0f172a 42%, #020617 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 56px 0 32px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(36px, 6vw, 72px);
+      line-height: 1.03;
+      margin-bottom: 20px;
+      letter-spacing: -0.04em;
+    }
+
+    .subtitle {
+      font-size: clamp(18px, 2vw, 22px);
+      color: var(--muted);
+      max-width: 760px;
+      margin-bottom: 28px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      border: 1px solid var(--border);
+      background: var(--card-soft);
+      color: var(--text);
+    }
+
+    .button.primary {
+      background: var(--accent);
+      color: #020617;
+      border-color: transparent;
+    }
+
+    .hero-card {
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px;
+      background: rgba(17, 24, 39, 0.78);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
+    }
+
+    .metric {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .metric:last-child {
+      border-bottom: none;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 34px;
+      color: var(--success);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    section {
+      padding: 38px 0;
+    }
+
+    h2 {
+      font-size: clamp(26px, 4vw, 40px);
+      line-height: 1.12;
+      margin-bottom: 16px;
+      letter-spacing: -0.03em;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      max-width: 780px;
+      margin-bottom: 22px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      background: rgba(17, 24, 39, 0.78);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .card h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .card p,
+    .card li {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    ul {
+      padding-left: 18px;
+    }
+
+    .wide {
+      grid-column: span 2;
+    }
+
+    .steps {
+      counter-reset: step;
+      display: grid;
+      gap: 14px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 14px;
+      align-items: start;
+      background: rgba(17, 24, 39, 0.78);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+    }
+
+    .step p {
+      color: var(--muted);
+    }
+
+    .footer {
+      padding: 44px 0 56px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      margin-top: 32px;
+    }
+
+    @media (max-width: 860px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .wide {
+        grid-column: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container hero">
+      <div>
+        <div class="badge">AI Quality • LLM Evaluation • Red Teaming</div>
+        <h1>LLM Quality & Red Teaming Lab</h1>
+        <p class="subtitle">
+          A practical portfolio project focused on evaluating LLM responses through structured QA rubrics, adversarial testing, hallucination detection, PT-BR localization checks and safety evaluation.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="../README.md">View project README</a>
+          <a class="button" href="../results/evaluation-report.md">Read evaluation report</a>
+          <a class="button" href="https://github.com/guilhermeTavo/llm-quality-red-teaming-lab">GitHub repository</a>
+        </div>
+      </div>
+
+      <aside class="hero-card" aria-label="Project metrics">
+        <div class="metric">
+          <strong>20</strong>
+          <span>sample test cases executed</span>
+        </div>
+        <div class="metric">
+          <strong>10</strong>
+          <span>quality evaluation tests</span>
+        </div>
+        <div class="metric">
+          <strong>10</strong>
+          <span>red teaming and safety tests</span>
+        </div>
+        <div class="metric">
+          <strong>100%</strong>
+          <span>sample safety pass rate</span>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="container">
+        <h2>Project Goal</h2>
+        <p class="section-intro">
+          The goal of this lab is to show a systematic approach to AI Quality: creating evaluation criteria, designing test cases, running manual model evaluations, documenting failures and extracting basic metrics from results.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>What is evaluated</h2>
+        <p class="section-intro">
+          Each response is reviewed using independent quality dimensions instead of a vague general judgment.
+        </p>
+        <div class="grid">
+          <article class="card">
+            <h3>Factual Accuracy</h3>
+            <p>Checks whether factual claims are correct and whether unsupported claims are avoided.</p>
+          </article>
+          <article class="card">
+            <h3>Instruction Following</h3>
+            <p>Checks whether the model respects explicit user constraints such as format, length and scope.</p>
+          </article>
+          <article class="card">
+            <h3>Hallucination</h3>
+            <p>Checks whether the model invents people, events, sources, citations or private information.</p>
+          </article>
+          <article class="card">
+            <h3>PT-BR Localization</h3>
+            <p>Checks whether Brazilian Portuguese responses sound natural, localized and appropriate.</p>
+          </article>
+          <article class="card">
+            <h3>Safety</h3>
+            <p>Checks whether the model refuses unsafe requests and avoids harmful guidance.</p>
+          </article>
+          <article class="card">
+            <h3>Adversarial Robustness</h3>
+            <p>Checks resistance to prompt injection, jailbreaks, fake authority and data leakage attempts.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Workflow</h2>
+        <div class="steps">
+          <div class="step">
+            <div>
+              <h3>Define evaluation rubric</h3>
+              <p>Create scoring rules for accuracy, instruction following, relevance, clarity, hallucination and localization.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div>
+              <h3>Create test cases</h3>
+              <p>Design quality tests and red-team tests covering normal usage, edge cases and adversarial prompts.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div>
+              <h3>Evaluate model responses</h3>
+              <p>Record model responses, score each dimension, classify safety behavior and assign severity.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div>
+              <h3>Generate metrics</h3>
+              <p>Use a Python script to calculate pass rate, safety pass rate, average scores and severity distribution.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>What this demonstrates</h2>
+        <div class="grid">
+          <article class="card wide">
+            <h3>AI Quality mindset</h3>
+            <p>
+              This project demonstrates a QA-oriented approach to LLM evaluation: structured testing, evidence-based scoring, reproducible criteria, issue severity and result reporting.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Relevant roles</h3>
+            <ul>
+              <li>AI Quality Analyst</li>
+              <li>LLM Evaluator</li>
+              <li>AI Model Evaluator</li>
+              <li>AI Safety Evaluator</li>
+              <li>QA Analyst</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p><strong>Guilherme Tavares</strong> — AI Quality Analyst | LLM Evaluator | QA Tester</p>
+      <p><a href="https://www.linkedin.com/in/guilherme-tavares-398563240/">LinkedIn</a> • <a href="https://github.com/guilhermeTavo">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>
